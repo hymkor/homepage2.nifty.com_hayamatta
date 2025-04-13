@@ -13,7 +13,7 @@ function mirror($src,$dst){
             mirror ($_.FullName) $newname
         } else {
             if ($name -match '\.html?$') {
-                nkf32 -w8 $_.FullName > $newname
+                nkf32 -w $_.FullName | perl -pe 'binmode(STDIN);binmode(STDOUT);s|"http://hp.vector.co.jp/authors/VA009797|"https://hymkor.github.io/hp.vector.co.jp_VA009797|g' > $newname
             } else {
                 Copy-Item $_.FullName $newname -Force
             }
